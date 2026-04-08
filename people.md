@@ -4,4 +4,4 @@ title: Our People
 permalink: /people/
 ---
 
-Description
+Description about our team

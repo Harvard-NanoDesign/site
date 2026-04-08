@@ -1,0 +1,28 @@
+// -----------------------------------------------------------------------------
+// Visual variables: Change these to re-skin the site
+// -----------------------------------------------------------------------------
+
+// Colors
+$brand-color: #007bff; // Main primary color (links, headers)
+$bg-color:    #ffffff; // Background
+$text-color:  #333333; // Standard text
+$light-gray:  #f8f9fa; // Background for cards/thrusts
+$border-color:#e1e4e8; // Standard border
+$nav-link-color: #ffff00; // Navigation links
+$nav-bg-color: #181818; // Navigation background
+
+$thrust-colors: (
+  "photonics": #ff6f61,
+  "materials": #6b5b95,
+  "carbon": #88b04b
+);
+
+// Typography
+$font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+$base-size:   16px;
+$line-height: 1.6;
+
+// Layout
+$max-width:   1100px;
+$padding:     1.5rem;
+$radius:      8px;

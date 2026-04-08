@@ -1,0 +1,126 @@
+// -----------------------------------------------------------------------------
+// Research Hierarchy & Thrust Styles
+// -----------------------------------------------------------------------------
+
+@use "variables" as *;
+
+.projects-hierarchy {
+  margin-top: 3rem;
+}
+
+// Collapsable Thrusts
+.thrust-group {
+  margin-bottom: 2rem;
+  border: 1px solid $border-color;
+  padding: 1.5rem;
+  border-radius: $radius;
+  background-color: $light-gray;
+  transition: box-shadow 0.2s;
+
+  &[open] {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  summary {
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #111;
+    list-style: none; // Remove default arrow
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &:focus {
+      outline: none;
+      color: $brand-color;
+    }
+
+    // Custom toggle icon logic
+    &:before {
+      content: '▶';
+      display: inline-block;
+      width: 1.5rem;
+      font-size: 0.8rem;
+      transition: transform 0.2s;
+      vertical-align: middle;
+      color: $brand-color;
+    }
+  }
+
+  &[open] summary:before {
+    transform: rotate(90deg);
+  }
+}
+
+.thrust-description {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+  color: #555;
+  font-style: italic;
+  font-size: 1.05rem;
+}
+
+.sub-projects {
+  margin-top: 2rem;
+  margin-left: 1.5rem;
+  padding-left: 1.5rem;
+  border-left: 3px solid $brand-color;
+
+  h4 {
+    margin-top: 0;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    color: #666;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+  }
+
+  li {
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+
+    strong {
+      color: #111;
+    }
+  }
+}
+
+// Cards for standalone projects
+.project-entry {
+  margin-bottom: 3rem;
+  padding: 1rem 0;
+
+  h3 {
+    margin-top: 0;
+    font-size: 1.6rem;
+  }
+
+  .project-status {
+    color: #777;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+}
+
+// Loop through the map in _variables.scss
+@each $name, $color in $thrust-colors {
+  .thrust-#{$name} {
+    background-color: rgba($color, 0.1); // Use a light version (10% opacity)
+    border-color: $color;
+    
+    summary:before {
+      color: $color; // Change the arrow color too
+    }
+    
+    .sub-projects {
+      border-left-color: $color; // Match the sub-project border
+    }
+  }
+}

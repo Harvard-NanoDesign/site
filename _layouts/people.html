@@ -3,11 +3,67 @@ layout: default
 ---
 
 <div class="people-page">
-    <h1>Our Research Group</h1>
+    <h1>Lab Members</h1>
     <p>{{ content }}</p>
 
+    <!-- Principle Investigator -->
     <div class="people-list">
-        {% for person in site.people %}
+        {% assign pis = site.people | where: "role", "Principle Investigator" | sort: "name" %}
+         {% if pis.size > 0 %}
+            <h2>Principal Investigator</h2>
+        {% endif %}
+        {% for person in pis %}
+            <article class="person-card">
+              {% if person.image %}
+                <img src="{{ person.image | relative_url }}" alt="{{ person.name }}" height="100px">
+              {% endif %}
+              <h3><a href="{{ person.url }}">{{ person.name }}</a></h3>
+              <p><strong>{{ person.role }}</strong></p>
+            </article>
+        {% endfor %}
+    </div>
+
+    <!-- Postdoctoral Researchers -->
+    <div class="people-list">
+        {% assign postdocs = site.people | where: "role", "Postdoctoral Researcher" | sort: "name" %}
+        {% if postdocs.size > 0 %}
+            <h2>Postdoctoral Researchers</h2>
+        {% endif %}
+        {% for person in postdocs %}
+            <article class="person-card">
+              {% if person.image %}
+                <img src="{{ person.image | relative_url }}" alt="{{ person.name }}" height="100px">
+              {% endif %}
+              <h3><a href="{{ person.url }}">{{ person.name }}</a></h3>
+              <p><strong>{{ person.role }}</strong></p>
+            </article>
+        {% endfor %}
+    </div>
+
+    <!-- PhD Students or PhD Candidates -->
+    <div class="people-list">
+        {% assign phds = site.people | where_exp: "item", "item.role == 'PhD Student' or item.role == 'PhD Candidate'" | sort: "name" %}
+        {% if phds.size > 0 %}
+            <h2>Graduate Students</h2>
+        {% endif %}
+        {% for person in phds %}
+            <article class="person-card">
+              {% if person.image %}
+                <img src="{{ person.image | relative_url }}" alt="{{ person.name }}" height="100px">
+              {% endif %}
+              <h3><a href="{{ person.url }}">{{ person.name }}</a></h3>
+              <p><strong>{{ person.role }}</strong></p>
+            </article>
+        {% endfor %}
+    </div>
+
+    <!-- Undergraduate Researchers, sorted by last name -->
+    <div class="people-list">
+        {% assign undergrads = site.people | where: "role", "Undergraduate Researcher" | sort: "name" %}
+        {% if undergrads.size > 0 %}
+            <h2>Undergraduate Researchers</h2>
+        {% endif %}
+        {% for person in undergrads %}
             <article class="person-card">
               {% if person.image %}
                 <img src="{{ person.image | relative_url }}" alt="{{ person.name }}" height="100px">

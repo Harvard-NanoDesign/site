@@ -5,10 +5,11 @@ layout: default
 <div class="bio-page">
     <div class="bio-header">
       {% if page.image %}
-        <img src="{{ page.image | relative_url }}" alt="{{ page.name }}" style="max-width: 200px; border-radius: 50%;">
+        <img src="{{ page.image | relative_url }}" alt="{{ page.name }}" style="max-width: 200px;">
       {% endif %}
       <h1>{{ page.name }}</h1>
       <p class="role"><strong>{{ page.role }}</strong></p>
+      <p class="email"><a href="mailto:{{ page.email }}">{{ page.email }}</a></p>
     </div>
 
     <hr>

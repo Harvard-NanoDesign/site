@@ -1,0 +1,70 @@
+---
+layout: default
+---
+
+<div class="research-page">
+    <h1>Our Research</h1>
+    <p>{{ content }}</p>
+
+    <div class="projects-hierarchy">
+    {% assign umbrella_projects = site.projects | where: "is_umbrella", true | where: "status", "Active" %}
+    
+    {% if umbrella_projects.size > 0 %}
+        <h2>Research Thrusts</h2>
+        {% for umbrella in umbrella_projects %}
+
+        {% if umbrella.thrust_type %}
+            {% assign thrust_class = "thrust-" | append: umbrella.thrust_type %}
+        {% else %}
+        {% assign thrust_class = "" %}
+        {% endif %}
+
+        <details class="thrust-group {{thrust_class}}">
+            <summary>
+            {{ umbrella.title }}
+            </summary>
+
+            <div class="thrust-subtitle">
+                <p><b> {{umbrella.subtitle}} </b></p>
+            </div>
+            
+            <div class="thrust-description">
+            <p>{{ umbrella.excerpt | strip_html | truncatewords: 50 }}</p>
+            <a href="{{ umbrella.url }}">View Full Research Thrust Details →</a>
+            </div>
+
+            <div class="sub-projects">
+            <h4>Projects within this Thrust</h4>
+            {% assign children = site.projects | where: "parent_projects", umbrella.title %}
+            {% if children.size > 0 %}
+                <ul>
+                {% for child in children %}
+                    <li>
+                    <a href="{{ child.url }}"><strong>{{ child.title }}</strong></a> — {{ child.status }}
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p><em>No sub-projects listed yet.</em></p>
+            {% endif %}
+            </div>
+        </details>
+        {% endfor %}
+    {% endif %}
+
+    {% assign individual_projects = site.projects | where_exp: "item", "item.is_umbrella != true" | where_exp: "item", "item.parent_projects == nil" %}
+    {% if individual_projects.size > 0 %}
+        <h2>Standalone Research Projects</h2>
+        <div class="projects-list">
+        {% for project in individual_projects %}
+            <article class="project-entry">
+            <h3><a href="{{ project.url }}">{{ project.title }}</a></h3>
+            <p><strong>Status:</strong> {{ project.status }}</p>
+            <p>{{ project.excerpt | strip_html | truncatewords: 30 }}</p>
+            <hr>
+            </article>
+        {% endfor %}
+        </div>
+    {% endif %}
+    </div>
+</div>
