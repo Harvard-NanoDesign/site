@@ -42,12 +42,12 @@ layout: default
         {% endfor %}
     </div>
 
-    <!-- PhD Students or PhD Candidates -->
+    <!-- Graduate Researchers -->
     <div class="people-list">
-        {% assign phds = site.people | where_exp: "item", "item.role == 'PhD Student' or item.role == 'PhD Candidate'" %}
-    {% assign sorted_phds = phds | sort: "name" %}
-    {% if sorted_phds.size > 0 %}
-            <h2>Graduate Students</h2>
+        {% assign phds = site.people | where: "role", "Graduate Researcher" %}
+        {% assign sorted_phds = phds | sort: "name" %}
+        {% if sorted_phds.size > 0 %}
+            <h2>Graduate Researchers</h2>
         {% endif %}
         {% for person in sorted_phds %}
             <article class="person-card">
